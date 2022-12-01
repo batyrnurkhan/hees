@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#a3fk#72lm&g&$@8!=s8rz8&q#d_f4f310b&1vrfdpw**upl$r'
-
+JWT_SECRET = 'batyr123'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
-
+    'resume',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'psycopg2',
 ]
 
@@ -128,3 +130,7 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = "users.User"
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
