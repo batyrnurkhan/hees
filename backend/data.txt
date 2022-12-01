@@ -1,0 +1,14 @@
+{
+"first_name": "Ais",
+"last_name":"Samurat",
+"email":"ais@test.ru",
+"password":"batyr123"
+}
+
+
+{
+    "first_name": "batyr",
+    "last_name":"nurkhan",
+    "email":"batyrnurhan@gmail.com",
+    "password":"batyr123"
+}
