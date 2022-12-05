@@ -1,14 +1,17 @@
 {
-"first_name": "Ais",
-"last_name":"Samurat",
+"fullname": "Ais Samurat",
 "email":"ais@test.ru",
 "password":"batyr123"
 }
 
 
 {
-    "first_name": "batyr",
-    "last_name":"nurkhan",
-    "email":"batyrnurhan@gmail.com",
+    "first_name": "admin",
+    "email":"admin@admin.ru",
     "password":"batyr123"
 }
+
+
+. ./env/Scripts/activate
+
+docker run docker-django-v0.0

@@ -1,8 +1,7 @@
 from rest_framework import views, response, exceptions, permissions
-
 from . import serializer as user_serializer
 from . import services, authentication
-
+from django.contrib.auth import logout
 class RegisterApi(views.APIView):
     def post(self, req):
         serializer = user_serializer.UserSerializer(data=req.data)
@@ -52,6 +51,5 @@ class LogoutApi(views.APIView):
     def post(self, request):
         resp = response.Response()
         resp.delete_cookie("jwt")
-        resp.data = {"message": "so long farewell"}
-
+        resp.data = {"message": "User Logged out successfully"}
         return resp

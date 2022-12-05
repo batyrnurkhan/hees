@@ -12,6 +12,7 @@ from .permissions import *
 from django.contrib.auth.models import User
 from rest_framework.pagination import PageNumberPagination
 from users import authentication
+from .permissions import *
 # Create your views here.
 
 
@@ -23,7 +24,7 @@ class MaterialsAPIList(generics.ListCreateAPIView):
     queryset = Materials.objects.all()
     serializer_class = MaterialsSerializer
     authentication_classes = (authentication.CustomUserAuthentication,)
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (IsTeacher,)
     pagination_class = MaterialsAPIListPaginamtion
 
 class MaterialsAPIUpdate(generics.RetrieveUpdateDestroyAPIView):

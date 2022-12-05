@@ -12,8 +12,7 @@ if TYPE_CHECKING:
 
 @dataclasses.dataclass
 class UserDataClass:
-    first_name: str
-    last_name: str
+    fullname: str
     email: str
     password: str = None
     id: int = None
@@ -21,16 +20,14 @@ class UserDataClass:
     @classmethod
     def from_instance(cls, user: "User") -> "UserDataClass":
         return cls(
-            first_name = user.first_name,
-            last_name = user.last_name,
+            fullname = user.fullname,
             email = user.email,
-            id = user.id
+            id = user.id,
         )
 
 def create_user(user_dc: "UserDataClass") -> "UserDataClass":
     instance = models.User(
-        first_name = user_dc.first_name,
-        last_name = user_dc.last_name,
+        fullname = user_dc.fullname,
         email = user_dc.email
     )
 

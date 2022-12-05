@@ -4,20 +4,17 @@ from django.contrib.auth import models as auth_models
 
 
 class UserManager(auth_models.BaseUserManager):
-    def create_user(self, first_name: str, 
-                    last_name: str, email:str , 
+    def create_user(self, fullname: str, 
+                    email:str , 
                     password: str = None, is_staff = False, 
                     is_superuser = False) -> "User":
         if not email:
             raise ValueError("no email")
-        if not last_name:
-            raise ValueError("no last name")
-        if not first_name:
-            raise ValueError("no first name")
+        if not fullname:
+            raise ValueError("no fullname")
 
         user = self.model(email=self.normalize_email(email))
-        user.first_name = first_name
-        user.last_name = last_name
+        user.fullname = fullname
         user.set_password(password)
         user.is_active = True
         user.is_staff = is_staff
@@ -26,12 +23,11 @@ class UserManager(auth_models.BaseUserManager):
 
         return user
 
-    def create_superuser(self, first_name: str, 
-                    last_name: str, email:str , 
+    def create_superuser(self, fullname: str, 
+                    email:str , 
                     password: str) -> "User":
         user = self.create_user(
-            first_name= first_name,
-            last_name=last_name,
+            fullname= fullname,
             email=email,
             password=password,
             is_staff=True,
@@ -45,13 +41,20 @@ class UserManager(auth_models.BaseUserManager):
 
 
 class User(auth_models.AbstractUser):
-    first_name = models.CharField(verbose_name="First Name", max_length=55)
-    last_name = models.CharField(verbose_name="Last Name", max_length=55)
+    fullname = models.CharField(verbose_name="First Name", max_length=255)
     email = models.EmailField(verbose_name="Email", max_length=255, unique=True)
     password = models.CharField(max_length=255)
     username = None
+    role = models.ForeignKey('Role', on_delete=models.PROTECT, null=True)
 
     objects = UserManager()
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["first_name" , "last_name"]
+    REQUIRED_FIELDS = ["fullname"]
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=100, db_index=True)
+
+    def __str__(self):
+        return self.name
